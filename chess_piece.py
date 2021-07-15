@@ -14,7 +14,7 @@ def piece_init(white_piece, black_piece):
     white_piece['BISHOP1'] = Chess_Piece('BISHOP', 2, 7 ,True, 'white')
     white_piece['BISHOP2'] = Chess_Piece('BISHOP', 5, 7 ,True, 'white')
     white_piece['QUEEN'] = Chess_Piece('QUEEN', 3, 7, True, 'white')
-    white_piece['KING'] = Chess_Piece('KING', 4, 7, True, 'white')
+    white_piece['KING'] = Chess_Piece("KING", 4, 7, True, "white")
 
     black_piece['PAWN1'] = Chess_Piece('PAWN', 0, 1, True, 'black')
     black_piece['PAWN2'] = Chess_Piece('PAWN', 1, 1, True, 'black')
@@ -41,6 +41,28 @@ class Chess_Piece:
         self.y = y
         self.status = status
         self.kinds = kinds
+
+    def name(self):
+        return (self.name) 
+
+    def x(self):
+        return (self.x) 
+
+    def y(self):
+        return (self.y) 
+
+    def status(self):
+        return (self.status)
+
+    def kinds(self):
+        return (self.kinds)
+
+    def all(self):
+        return (self.name) 
+        return (self.x) 
+        return (self.y) 
+        return (self.status)
+        return (self.kinds)
 
     def print_name(self):
         print(self.name) 
