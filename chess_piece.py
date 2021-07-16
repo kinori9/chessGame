@@ -35,15 +35,15 @@ def piece_init(white_piece, black_piece):
 
 class Chess_Piece:
 
-    def __init__(self, name, x, y, status, kinds):
-        self.name = name
+    def __init__(self, kinds, x, y, status, color):
+        self.kinds = kinds
         self.x = x
         self.y = y
         self.status = status
-        self.kinds = kinds
+        self.color = color
 
-    def name(self):
-        return (self.name) 
+    def kinds(self):
+        return (self.kinds) 
 
     def x(self):
         return (self.x) 
@@ -54,18 +54,18 @@ class Chess_Piece:
     def status(self):
         return (self.status)
 
-    def kinds(self):
-        return (self.kinds)
+    def color(self):
+        return (self.color)
 
     def all(self):
-        return (self.name) 
+        return (self.kinds) 
         return (self.x) 
         return (self.y) 
         return (self.status)
-        return (self.kinds)
+        return (self.color)
 
-    def print_name(self):
-        print(self.name) 
+    def print_kinds(self):
+        print(self.kinds) 
 
     def print_x(self):
         print(self.x) 
@@ -76,12 +76,12 @@ class Chess_Piece:
     def print_status(self):
         print(self.status)
 
-    def print_kinds(self):
-        print(self.kinds)
+    def print_color(self):
+        print(self.color)
 
     def print_all(self):
-        print(self.name) 
+        print(self.kinds) 
         print(self.x) 
         print(self.y) 
         print(self.status)
-        print(self.kinds)
+        print(self.color)
