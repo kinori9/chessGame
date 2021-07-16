@@ -56,14 +56,19 @@ class MyApp(QWidget):
             print(self.can_move_list)
             print('can move {}'.format(self.kinds))
         elif self.kinds == 'ROOK':
+            #self.can_move_list.extend(get_rook_list(self.select_x, self.select_y, self.kinds))
             print('can move {}'.format(self.kinds))
         elif self.kinds == 'KINGHT':
+            #self.can_move_list.extend(get_kinght_list(self.select_x, self.select_y, self.kinds))
             print('can move {}'.format(self.kinds))
         elif self.kinds == 'BISHOP':
+            #self.can_move_list.extend(get_bishop_list(self.select_x, self.select_y, self.kinds))
             print('can move {}'.format(self.kinds))
         elif self.kinds == 'QUEEN':
+            #self.can_move_list.extend(get_queen_list(self.select_x, self.select_y, self.kinds))
             print('can move {}'.format(self.kinds))
         else:
+            #self.can_move_list.extend(get_king_list(self.select_x, self.select_y, self.kinds))
             print('can move {}'.format(self.kinds))
         #self.list.append()
 

@@ -3,7 +3,7 @@ from global_var import *
 def location_cal(num):
     return (num * 100)
 
-def location_calc_y(y, distance):
+def location_calc_y(y, distance, cal):
     fix_y = 50
     plus = 1
     minus = -1
@@ -30,22 +30,27 @@ def get_pawn_list(x, y, kinds):
     if kinds == white:
         for piece in white_piece:
             if piece.x != x and piece.y != y:
-                can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 1)))
+                can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 1, plus)))
             if y == 6:
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 2)))
+                    can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 2, plus)))
     else:
         for piece in black_piece:
             if piece.x != x and piece.y != y:
-                can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 1)))
+                can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 1, minus)))
         if y == 1:
             for piece in black_piece:
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 2)))
-
-
+                    can_move_list.append(str(location_calc_x(x)) + ',' + str(location_calc_y(y, 2, minius)))
     print(can_move_list)
     return (can_move_list)
 
-#def get_rook_list(x, y):
+def get_rook_list(x, y):
+    white = 0
+    black = 1
+    plus = 1
+    minius = -1
+    # left, top, right, bottom
+    #for i in :
+
 
