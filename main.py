@@ -34,6 +34,7 @@ class MyApp(QWidget):
         print("piece init start")
         piece_init(white_piece, black_piece)
         print("piece init end")
+        #print('white_piece : {},  black_piece : {}', white_piece, black_piece)
 
 # ================ chees_board setting ==================
 
@@ -42,7 +43,7 @@ class MyApp(QWidget):
         qp.begin(self)
         self.draw_init_chessBoard(qp)
         self.draw_init_chessPiece(qp)
-        #print('self.select_x : {} self.select_y {}'.format(self.select_x, self.select_y))
+        print('self.select_x : {} self.select_y {}'.format(self.select_x, self.select_y))
         if self.select_x != -1 and self.select_y != -1:
             self.write_list_can_move()
             self.draw_piece_can_move(qp)
@@ -53,7 +54,6 @@ class MyApp(QWidget):
     def write_list_can_move(self):
         if self.kinds == 'PAWN':
             self.can_move_list.extend(get_pawn_list(self.select_x, self.select_y, self.kinds))
-            print(self.can_move_list)
             print('can move {}'.format(self.kinds))
         elif self.kinds == 'ROOK':
             #self.can_move_list.extend(get_rook_list(self.select_x, self.select_y, self.kinds))
@@ -76,7 +76,8 @@ class MyApp(QWidget):
     def draw_piece_can_move(self, qp):
         qp.setFont(QFont('Arial', 26))
         qp.setPen(QPen(Qt.blue, 3))
-        print('can_move_list : {}'.format)
+        for lst in self.can_move_list:
+            print('can_move_list : {}'.format(lst))
         print(self.can_move_list)
         can_move_list = self.can_move_list
         for piece in can_move_list:
@@ -89,8 +90,6 @@ class MyApp(QWidget):
     def draw_init_chessPiece(self, qp):
         x = 100
         y = 0
-        global white_piece
-        global black_piece
 
         qp.setFont(QFont('Arial', 26))
         qp.setPen(QPen(Qt.gray, 3))
