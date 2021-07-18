@@ -51,18 +51,20 @@ class Chess_Piece:
     def y(self):
         return (self.y) 
 
-    def status(self):
-        return (self.status)
+    #def status(self):
+        #return (self.status)
 
     def color(self):
         return (self.color)
 
-    def all(self):
-        return (self.kinds) 
-        return (self.x) 
-        return (self.y) 
-        return (self.status)
-        return (self.color)
+    def list_all(self):
+        list = []
+        list.append(self.kinds)
+        list.append(self.x)
+        list.append(self.y)
+        list.append(self.status)
+        list.append(self)
+        return (list)
 
     def print_kinds(self):
         print(self.kinds) 
@@ -73,8 +75,8 @@ class Chess_Piece:
     def print_y(self):
         print(self.y) 
 
-    def print_status(self):
-        print(self.status)
+    #def print_status(self):
+        #print(self.status)
 
     def print_color(self):
         print(self.color)
