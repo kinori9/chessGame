@@ -93,11 +93,13 @@ class MyApp(QWidget):
         qp.end()
         
     def write_list_can_move(self):
+        self.can_move_list.clear()
         if self.kinds == 'PAWN':
             self.can_move_list.extend(get_pawn_list(self.select_x, self.select_y, self.color))
             print('can_move_list {}'.format(self.can_move_list))
             print('can move {}'.format(self.kinds))
         elif self.kinds == 'ROOK':
+            self.can_move_list.extend(get_pawn_list(self.select_x, self.select_y, self.color))
             #self.can_move_list.extend(get_rook_list(self.select_x, self.select_y, self.color))
             print('can move {}'.format(self.kinds))
         elif self.kinds == 'KINGHT':
@@ -219,7 +221,9 @@ class MyApp(QWidget):
         #    print()
         print('--------piece can move info add complete---------')
 
-    def piece_move(self, white_piece, black_piece, color, x, y):
+    def piece_move(self, white_piece, black_piece, x, y):
+        global turn
+        check = False
         fix_x = 10
         fix_y = 50
         for can_move in self.can_move_list:
@@ -228,6 +232,10 @@ class MyApp(QWidget):
             if x == tmp_x and y == tmp_y:
                 self.move_select_x = x
                 self.move_select_y = y
+                check = True
+                turn += 1
+        if check == True:
+            turn += 1
         self.update()
         self.can_move_list.clear()
             
@@ -253,9 +261,8 @@ class MyApp(QWidget):
                         self.piece_can_move(e, white_piece, black_piece, white_turn, x, y)
                         self.update()
                 elif white_status == 1:
-                    self.piece_move(white_piece, black_piece, white_turn, x, y)
+                    self.piece_move(white_piece, black_piece, x, y)
                     white_status = 0
-                    turn += 1
             else:
                 if black_status == 0:
                     self.piece_select(white_piece, black_piece, black_turn, x, y)
@@ -265,9 +272,8 @@ class MyApp(QWidget):
                         self.piece_can_move(e, white_piece, black_piece, black_turn, x, y)
                         self.update()
                 elif black_status == 1:
-                    self.piece_move(white_piece, black_piece, black_turn, x, y)
+                    self.piece_move(white_piece, black_piece, x, y)
                     black_status = 0
-                    turn += 1
             print('---------------------------')
             print('turn : {}\nwhite_status : {}\nblack_status : {}\n'.format(turn, white_status, black_status))
             print('---------------------------')
