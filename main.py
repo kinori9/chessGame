@@ -127,8 +127,9 @@ class MyApp(QWidget):
         for piece in can_move_list:
             location = str(piece).split(',')
             #print(location)
-            x = int(location[0])
-            y = int(location[1])
+            x = int(location[0]) * 100 + 10 
+            y = int(location[1]) * 100 + 50
+            print('can_move_location x : {}, y : {}'.format(x, y))
             qp.drawText(x, y, 'can move')
         
     def draw_init_chessPiece(self, qp):
@@ -214,7 +215,6 @@ class MyApp(QWidget):
                         print(key)
                     if value.kinds == 'KING':
                         print(key)
-    
         #if color == white:
         #    print()
         print('--------piece can move info add complete---------')
@@ -222,23 +222,13 @@ class MyApp(QWidget):
     def piece_move(self, white_piece, black_piece, color, x, y):
         fix_x = 10
         fix_y = 50
-        print('---------piece_move-------------')
-        print('piece_move_color : {}'.format(self.color))
         for can_move in self.can_move_list:
-            tmp_x = can_move.split(',')[0]
-            tmp_y = can_move.split(',')[1]
-            can_move_x = (int(tmp_x) - fix_x) / 100
-            can_move_y = (int(tmp_y) - fix_y) / 100
-            can_move_x = int(can_move_x)
-            can_move_y = int(can_move_y)
-            print(can_move_x)
-            print(can_move_y)
-            if x == can_move_x and y == can_move_y:
+            tmp_x = int(can_move.split(',')[0])
+            tmp_y = int(can_move.split(',')[1])
+            if x == tmp_x and y == tmp_y:
                 self.move_select_x = x
                 self.move_select_y = y
-        print('---------piece_move------------------')
         self.update()
-        print(self.can_move_list)
         self.can_move_list.clear()
             
     def mousePressEvent(self, e):
