@@ -52,6 +52,42 @@ def get_rook_list(x, y, color):
                 break
 
         print('############################debug############################')
+        not_found = True
+        kill = False
+        for i in range(1, 8):
+            print(i)
+            for w_name, w_piece in white_piece.items():
+                for b_name, b_piece in black_piece.items():
+                    if w_piece.x == x - i and w_piece.y == y:
+                        not_found = False
+                    if (b_piece.x == x - i and b_piece.y == y) and kill == False:
+                        can_move_list.append(str(x - i) + ',' + str(y))
+                        kill = True
+                        not_found = False
+            if not_found == True:
+                can_move_list.append(str(x - i) + ',' + str(y))
+                print('get_rook_list x : {}, y : {}'.format(x - i, y))
+            else:
+                break
+
+        print('############################debug############################')
+        not_found = True
+        kill = False
+        for i in range(1, 8):
+            print(i)
+            for w_name, w_piece in white_piece.items():
+                for b_name, b_piece in black_piece.items():
+                    if w_piece.x == x + i and w_piece.y == y:
+                        not_found = False
+                    if (b_piece.x == x + i and b_piece.y == y) and kill == False:
+                        can_move_list.append(str(x + i) + ',' + str(y))
+                        kill = True
+                        not_found = False
+            if not_found == True:
+                can_move_list.append(str(x + i) + ',' + str(y))
+                print('get_rook_list x : {}, y : {}'.format(x + i, y))
+            else:
+                break
 
         """
         kill = False
