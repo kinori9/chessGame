@@ -7,7 +7,7 @@ from get_pawn_list import *
 from get_rook_list import *
 from get_kinght_list import *
 from get_bishop_list import *
-from get_queen_list import *
+from get_king_list import *
 from location_cal import *
 from chess_piece import *
 from PyQt5.QtWidgets import *
@@ -100,11 +100,12 @@ class MyApp(QWidget):
             print('queen')
             self.can_move_list.extend(get_rook_list(self.select_x, self.select_y, self.color))
             self.can_move_list.extend(get_bishop_list(self.select_x, self.select_y, self.color))
-            #self.can_move_list.extend(get_queen_list(self.select_x, self.select_y, self.color))
+            print('can move {}'.format(self.kinds))
+        elif self.kinds == 'KING':
+            self.can_move_list.extend(get_king_list(self.select_x, self.select_y, self.color))
             print('can move {}'.format(self.kinds))
         else:
-            #self.can_move_list.extend(get_king_list(self.select_x, self.select_y, self.kinds))
-            print('can move {}'.format(self.kinds))
+            print('error message')
         #self.list.append()
 
     # recive list draw
