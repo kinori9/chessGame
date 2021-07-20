@@ -7,75 +7,53 @@ def get_rook_list(x, y, color):
     plus = 1
     minius = -1
     # left, top, right, bottom
-    """
+    print(color)
     if color == 'white':
-        if y == 6: #예외 처리 맨처음 두칸 갈수 있을경우 
-            kill = False
-            for i in range(1, 3): for name, piece in white_piece.items():
-                    if piece.x == x and piece.y == y - i:
+        print('############################debug############################')
+        # UP
+        not_found = True
+        kill = False
+        for i in range(1, 8):
+            print(i)
+            for w_name, w_piece in white_piece.items():
+                for b_name, b_piece in black_piece.items():
+                    if w_piece.x == x and w_piece.y == y - i:
                         not_found = False
-                        if piece.color != color:
-                            kill = True
-                if kill == True:
-                    can_move_list.append(str(x) + ',' + str(y - i))
-                    break
-                if not_found == True:
-                    can_move_list.append(str(x) + ',' + str(y - i))
-                else:
-                    break
-        else:
-            kill = False
-            for i in range(1, 2):
-                for name, piece in white_piece.items():
-                    if piece.x == x and piece.y == y - i:
+                    if (b_piece.x == x and b_piece.y == y - i) and kill == False:
+                        can_move_list.append(str(x) + ',' + str(y - i))
+                        kill = True
                         not_found = False
-                        if piece.color != color:
-                            kill = True
-                if kill == True:
-                    can_move_list.append(str(x) + ',' + str(y - i))
-                    break
-                if not_found == True:
-                    can_move_list.append(str(x) + ',' + str(y - i))
-                else:
-                    break
-    else: # if color == 'black':
-        if y == 1:
-            kill = False
-            for i in range(1, 3):
-                for name, piece in black_piece.items():
-                    if piece.x == x and piece.y == y + i:
+            if not_found == True:
+                can_move_list.append(str(x) + ',' + str(y - i))
+                print('get_rook_list x : {}, y : {}'.format(x, y - i))
+            else:
+                break
+        # DOWN
+        print("@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@")
+        print('don\' start')
+        not_found = True
+        kill = False
+        for i in range(1, 8):
+            print('debug')
+            for w_name, w_piece in white_piece.items():
+                print('debug2')
+                for b_name, b_piece in black_piece.items():
+                    print('debug3')
+                    if w_piece.x == x and w_piece.y == y + i:
                         not_found = False
-                        if piece.color != color:
-                            kill = True
-                if kill == True:
-                    can_move_list.append(str(x) + ',' + str(y + i))
-                    break
-                else:
-                    can_move_list.append(str(x) + ',' + str(y + i))
-                if not_found == True:
-                    can_move_list.append(str(x) + ',' + str(y + i))
-                else:
-                    break
-        else:
-            kill = False
-            for i in range(1, 2):
-                for name, piece in black_piece.items():
-                    if piece.x == x and piece.y == y + i:
+                    if (b_piece.x == x and b_piece.y == y + i) and kill == False:
+                        can_move_list.append(str(x) + ',' + str(y + i))
+                        kill = True
                         not_found = False
-                        if piece.color != color:
-                            kill = True
-                if kill == True:
-                    can_move_list.append(str(x) + ',' + str(y + i))
-                    break
-                else:
-                    can_move_list.append(str(x) + ',' + str(y + i))
-                if not_found == True:
-                    can_move_list.append(str(x) + ',' + str(y + i))
-                else:
-                    break
+            if not_found == True:
+                can_move_list.append(str(x) + ',' + str(y + i))
+                print('get_rook_list x : {}, y : {}'.format(x, y + i))
+            else:
+                break
 
-    """
-    if color == 'white':
+        print('############################debug############################')
+
+        """
         kill = False
         #left
         for i in range(0, x, -1):
@@ -83,41 +61,27 @@ def get_rook_list(x, y, color):
                 if piece.x == x - i and piece.y == y:
                     not_found = False
             if not_found == True:
-                can_move_list.append(location_calc_x(x, i, minius) + ',' + location_calc_y(y, 0, plus))
+                can_move_list.append(str(x - i) + ',' + str(y))
             else:
                 break
         #top
-        for i in range(0, y, -1):
-            print(i)
-            for name, piece in white_piece.items():
-                if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
-                elif (piece.x == x and piece.y == y) and kill == 0:
-                    can_move_list.append(str(locatoin_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
-                    break
         #right
         for i in range(x, 8, 1):
             print(i)
             for name, piece in white_piece.items():
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x, i, plus) + ',' + str(location_calc_y(y, 0, plus))))
-                    total += 1
+                    can_move_list.append(str(x + i) + ',' + str(y))
                 elif (piece.x == x and piece.y == y) and kill == 0:
-                    can_move_list.append(str(locatoin_calc_x(x, i, plus) + ',' + str(location_calc_y(y, 0, plus))))
-                    total += 1
+                    can_move_list.append(str(x + i) + ',' + str(y))
                     break
         #bottom
         for i in range(y, 8, 1):
             print(i)
             for name, piece in white_piece.items():
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
+                    can_move_list.append(str(x) + ',' + str(y - i))
                 elif piece.x == x and piece.y == y:
-                    can_move_list.append(str(locatoin_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
+                    can_move_list.append(str(x) + ',' + str(y - i))
                     break
 
     else: # color == black
@@ -128,11 +92,9 @@ def get_rook_list(x, y, color):
                 if kill == 1:
                     break
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x, i, minius) + ',' + str(location_calc_y(y, 0, plus))))
-                    total += 1
+                    can_move_list.append(str(x - i) + ',' + str(y))
                 elif (piece.x == x and piece.y == y) and kill == 0:
-                    can_move_list.append(str(locatoin_calc_x(x, i, minius) + ',' + str(location_calc_y(y, 0, plus))))
-                    total += 1
+                    can_move_list.append(str(x - i) + ',' + str(y))
                     kill = 1
         #top
         kill = 0
@@ -142,11 +104,9 @@ def get_rook_list(x, y, color):
                 if kill == 1:
                     break
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
+                    can_move_list.append(str(x) + ',' + str(y - i))
                 elif (piece.x == x and piece.y == y) and kill == 0:
-                    can_move_list.append(str(locatoin_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
+                    can_move_list.append(str(x) + ',' + str(y - i))
                     kill = 1
         #right
         kill = 0
@@ -156,11 +116,9 @@ def get_rook_list(x, y, color):
                 if kill == 1:
                     break
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x, i, plus) + ',' + str(location_calc_y(y, 0, plus))))
-                    total += 1
+                    can_move_list.append(str(x + i) + ',' + str(y))
                 elif (piece.x == x and piece.y == y) and kill == 0:
-                    can_move_list.append(str(locatoin_calc_x(x, i, plus) + ',' + str(location_calc_y(y, 0, plus))))
-                    total += 1
+                    can_move_list.append(str(x + i) + ',' + str(y))
                     kill = 1
         #bottom
         kill = 0
@@ -170,9 +128,9 @@ def get_rook_list(x, y, color):
                 if kill == 1:
                     break
                 if piece.x != x and piece.y != y:
-                    can_move_list.append(str(location_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
+                    can_move_list.append(str(x) + ',' + str(y - i))
                 elif (piece.x == x and piece.y == y) and kill == 0:
-                    can_move_list.append(str(locatoin_calc_x(x, 0, plus) + ',' + str(location_calc_y(y, i, minius))))
-                    total += 1
+                    can_move_list.append(str(x) + ',' + str(y - i))
                     kill = 1
+        """
+    return (can_move_list)
