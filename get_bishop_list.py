@@ -1,135 +1,141 @@
 from global_var import *
 
-def get_rook_list(x, y, color):
+def get_bishop_list(x, y, color):
     can_move_list = []
     if color == 'white':
-        # UP
+    #Quadrant 1
         not_found = True
         kill = False
         for i in range(1, 8):
             for w_name, w_piece in white_piece.items():
                 for b_name, b_piece in black_piece.items():
-                    if w_piece.x == x and w_piece.y == y - i:
+                    if w_piece.x == x + i and w_piece.y == y - i:
                         not_found = False
-                    if (b_piece.x == x and b_piece.y == y - i) and kill == False:
-                        can_move_list.append(str(x) + ',' + str(y - i))
+                    if (b_piece.x == x + i and b_piece.y == y - i) and kill == False:
+                        can_move_list.append(str(x + i) + ',' + str(y - i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x) + ',' + str(y - i))
+                can_move_list.append(str(x + i) + ',' + str(y - i))
             else:
                 break
-        # DOWN
+
+    #Quadrant 2
         not_found = True
         kill = False
         for i in range(1, 8):
             for w_name, w_piece in white_piece.items():
                 for b_name, b_piece in black_piece.items():
-                    if w_piece.x == x and w_piece.y == y + i:
+                    if w_piece.x == x - i and w_piece.y == y - i:
                         not_found = False
-                    if (b_piece.x == x and b_piece.y == y + i) and kill == False:
-                        can_move_list.append(str(x) + ',' + str(y + i))
+                    if (b_piece.x == x - i and b_piece.y == y - i) and kill == False:
+                        can_move_list.append(str(x - i) + ',' + str(y - i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x) + ',' + str(y + i))
+                can_move_list.append(str(x - i) + ',' + str(y - i))
             else:
                 break
-        # LEFT
+
+    #Quadrant 3
         not_found = True
         kill = False
         for i in range(1, 8):
             for w_name, w_piece in white_piece.items():
                 for b_name, b_piece in black_piece.items():
-                    if w_piece.x == x - i and w_piece.y == y:
+                    if w_piece.x == x - i and w_piece.y == y + i:
                         not_found = False
-                    if (b_piece.x == x - i and b_piece.y == y) and kill == False:
-                        can_move_list.append(str(x - i) + ',' + str(y))
+                    if (b_piece.x == x - i and b_piece.y == y + i) and kill == False:
+                        can_move_list.append(str(x - i) + ',' + str(y + i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x - i) + ',' + str(y))
+                can_move_list.append(str(x - i) + ',' + str(y + i))
             else:
                 break
-        # RIGHT
+
+    #Quadrant 4
         not_found = True
         kill = False
         for i in range(1, 8):
             for w_name, w_piece in white_piece.items():
                 for b_name, b_piece in black_piece.items():
-                    if w_piece.x == x + i and w_piece.y == y:
+                    if w_piece.x == x + i and w_piece.y == y + i:
                         not_found = False
-                    if (b_piece.x == x + i and b_piece.y == y) and kill == False:
-                        can_move_list.append(str(x + i) + ',' + str(y))
+                    if (b_piece.x == x + i and b_piece.y == y + i) and kill == False:
+                        can_move_list.append(str(x + i) + ',' + str(y + i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x + i) + ',' + str(y))
+                can_move_list.append(str(x + i) + ',' + str(y + i))
             else:
                 break
     else:
-        # DOWN
+    #Quadrant 1
         not_found = True
         kill = False
         for i in range(1, 8):
             for b_name, b_piece in black_piece.items():
                 for w_name, w_piece in white_piece.items():
-                    if b_piece.x == x and b_piece.y == y + i:
+                    if b_piece.x == x + i and b_piece.y == y - i:
                         not_found = False
-                    if (w_piece.x == x and w_piece.y == y + i) and kill == False:
-                        can_move_list.append(str(x) + ',' + str(y + i))
+                    if (w_piece.x == x + i and w_piece.y == y - i) and kill == False:
+                        can_move_list.append(str(x + i) + ',' + str(y - i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x) + ',' + str(y + i))
+                can_move_list.append(str(x + i) + ',' + str(y - i))
             else:
                 break
-        # UP
+
+    #Quadrant 2
         not_found = True
         kill = False
         for i in range(1, 8):
             for b_name, b_piece in black_piece.items():
                 for w_name, w_piece in white_piece.items():
-                    if b_piece.x == x and b_piece.y == y - i:
+                    if b_piece.x == x - i and b_piece.y == y - i:
                         not_found = False
-                    if (w_piece.x == x and w_piece.y == y - i) and kill == False:
-                        can_move_list.append(str(x) + ',' + str(y - i))
+                    if (w_piece.x == x - i and w_piece.y == y - i) and kill == False:
+                        can_move_list.append(str(x - i) + ',' + str(y - i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x) + ',' + str(y - i))
+                can_move_list.append(str(x - i) + ',' + str(y - i))
             else:
                 break
-        # LEFT
+
+    #Quadrant 3
         not_found = True
         kill = False
         for i in range(1, 8):
             for b_name, b_piece in black_piece.items():
                 for w_name, w_piece in white_piece.items():
-                    if b_piece.x == x - i and b_piece.y == y:
+                    if b_piece.x == x - i and b_piece.y == y + i:
                         not_found = False
-                    if (w_piece.x == x - i and w_piece.y == y) and kill == False:
-                        can_move_list.append(str(x - i) + ',' + str(y))
+                    if (w_piece.x == x - i and w_piece.y == y + i) and kill == False:
+                        can_move_list.append(str(x - i) + ',' + str(y + i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x - i) + ',' + str(y))
+                can_move_list.append(str(x - i) + ',' + str(y + i))
             else:
                 break
-        # RIGHT
+
+    #Quadrant 4
         not_found = True
         kill = False
         for i in range(1, 8):
             for b_name, b_piece in black_piece.items():
                 for w_name, w_piece in white_piece.items():
-                    if b_piece.x == x + i and b_piece.y == y:
+                    if b_piece.x == x + i and b_piece.y == y + i:
                         not_found = False
-                    if (w_piece.x == x + i and w_piece.y == y) and kill == False:
-                        can_move_list.append(str(x + i) + ',' + str(y))
+                    if (w_piece.x == x + i and w_piece.y == y + i) and kill == False:
+                        can_move_list.append(str(x + i) + ',' + str(y + i))
                         kill = True
                         not_found = False
             if not_found == True:
-                can_move_list.append(str(x + i) + ',' + str(y))
+                can_move_list.append(str(x + i) + ',' + str(y + i))
             else:
                 break
     return (can_move_list)

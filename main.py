@@ -5,6 +5,9 @@ import const
 from global_var import *
 from get_pawn_list import *
 from get_rook_list import *
+from get_kinght_list import *
+from get_bishop_list import *
+from get_queen_list import *
 from location_cal import *
 from chess_piece import *
 from PyQt5.QtWidgets import *
@@ -48,11 +51,6 @@ class MyApp(QWidget):
             self.select_y = -1
 
     def change_piece_location(self, qp):
-        #global white_piece
-        #global black_piece
-        #qp.setFont(QFont('Arial', 26))
-        #qp.setPen(QPen(Qt.gray, 3))
-        print('cange_piece_location')
         if self.move_select_x != -1 and self.move_select_y != -1:
             if self.color == 'white':
                 for name, piece in white_piece.items():
@@ -63,7 +61,6 @@ class MyApp(QWidget):
                         for name, piece in list(black_piece.items()):
                             if piece.x == self.move_select_x and piece.y == self.move_select_y:
                                 del black_piece[name]
-                                print('--------------------------------delete piece')
             elif self.color == 'black':
                 for name, piece in black_piece.items():
                     if name == self.name:
@@ -73,8 +70,6 @@ class MyApp(QWidget):
                         for name, piece in list(white_piece.items()):
                             if piece.x == self.move_select_x and piece.y == self.move_select_y:
                                 del white_piece[name]
-                                print('--------------------------------delete piece')
-            print('move_select_x : {}, move_select_y : {}'.format(self.move_select_x, self.move_select_y))
             self.color = None
             self.update()
             self.move_select_x = -1
@@ -93,22 +88,18 @@ class MyApp(QWidget):
         
     def write_list_can_move(self):
         self.can_move_list.clear()
-        print('self.kinds : {}'.format(self.kinds))
         if self.kinds == 'PAWN':
             self.can_move_list.extend(get_pawn_list(self.select_x, self.select_y, self.color))
-            print('can_move_list {}'.format(self.can_move_list))
-            print('can move {}'.format(self.kinds))
         elif self.kinds == 'ROOK':
             self.can_move_list.extend(get_rook_list(self.select_x, self.select_y, self.color))
-            print('can_move_list {}'.format(self.can_move_list))
-            print('can move {}'.format(self.kinds))
         elif self.kinds == 'KINGHT':
-            #self.can_move_list.extend(get_kinght_list(self.select_x, self.select_y, self.color))
-            print('can move {}'.format(self.kinds))
+            self.can_move_list.extend(get_kinght_list(self.select_x, self.select_y, self.color))
         elif self.kinds == 'BISHOP':
-            #self.can_move_list.extend(get_bishop_list(self.select_x, self.select_y, self.color))
-            print('can move {}'.format(self.kinds))
+            self.can_move_list.extend(get_bishop_list(self.select_x, self.select_y, self.color))
         elif self.kinds == 'QUEEN':
+            print('queen')
+            self.can_move_list.extend(get_rook_list(self.select_x, self.select_y, self.color))
+            self.can_move_list.extend(get_bishop_list(self.select_x, self.select_y, self.color))
             #self.can_move_list.extend(get_queen_list(self.select_x, self.select_y, self.color))
             print('can move {}'.format(self.kinds))
         else:
@@ -161,82 +152,39 @@ class MyApp(QWidget):
             self.showNormal()
 
     def piece_can_move(self, e, white_piece, black_piece, color_turn, x, y):
-        can_x = -1
-        cna_y = -1
         white_turn = 0
         black_turn = 1
-        print('--------piece can move---------')
-        #print(white_piece)
         if color_turn == white_turn:
             for key, value in white_piece.items():
                 if value.x == x and value.y == y:
                     print('x : {}, y : {}'.format(x, y))
                     if value.kinds == 'PAWN':
-                        self.name = key
-                        self.select_x = value.x 
-                        self.select_y = value.y
-                        self.kinds = value.kinds
-                        self.color = value.color
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'ROOK':
-                        self.name = key
-                        self.select_x = value.x 
-                        self.select_y = value.y
-                        self.kinds = value.kinds
-                        self.color = value.color
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'KINGHT':
-                        self.name = key
-                        self.select_x = value.x 
-                        self.select_y = value.y
-                        self.kinds = value.kinds
-                        self.color = value.color
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'BISHOP':
-                        self.name = key
-                        self.select_x = value.x 
-                        self.select_y = value.y
-                        self.kinds = value.kinds
-                        self.color = value.color
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'QUEEN':
-                        self.name = key
-                        self.select_x = value.x 
-                        self.select_y = value.y
-                        self.kinds = value.kinds
-                        self.color = value.color
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'KING':
-                        self.name = key
-                        self.select_x = value.x 
-                        self.select_y = value.y
-                        self.kinds = value.kinds
-                        self.color = value.color
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
         elif color_turn == black_turn:
             for key, value in black_piece.items():
                 if value.x == x and value.y == y:
-                    print('x : {}, y : {}'.format(x, y))
                     if value.kinds == 'PAWN':
-                        self.name = key
-                        self.select_x = value.x 
-                        self.select_y = value.y
-                        self.kinds = value.kinds
-                        self.color = value.color
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'ROOK':
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'KINGHT':
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'BISHOP':
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'QUEEN':
-                        print(key)
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
                     if value.kinds == 'KING':
-                        print(key)
-        #if color == white:
-        #    print()
-        print('--------piece can move info add complete---------')
+                        self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
 
     def piece_move(self, white_piece, black_piece, x, y):
         global turn
@@ -291,7 +239,7 @@ class MyApp(QWidget):
                     self.piece_move(white_piece, black_piece, x, y)
                     black_status = 0
             print("#############################################")
-            print('###########now turn : {}###########'.format(turn))
+            print('################now turn : {}################'.format(turn))
             print("#############################################")
 
     def piece_select(self, white_piece, black_piece, color_turn, x, y):
@@ -313,11 +261,11 @@ class MyApp(QWidget):
                     black_status = 1
         if color_turn == white_turn and white_status == 0:
             print("#############################################")
-            print("@@@@@----please white_piece choice-----@@@@@@")
+            print("#########please white_piece choice###########")
             print("#############################################")
         elif color_turn == black_turn and black_status == 0:
             print("#############################################")
-            print("@@@@@----please black_piece choice-----@@@@@@")
+            print("#########please black_piece choice###########")
             print("#############################################")
             
 # ================= class end ==================
