@@ -74,6 +74,18 @@ class MyApp(QWidget):
             self.update()
             self.move_select_x = -1
             self.move_select_y = -1
+            try:
+                if white_piece['KING']:
+                    pass
+            except KeyError:
+                print('black win')
+                self.close()
+            try:
+                if black_piece['KING']:
+                    pass
+            except KeyError:
+                print('white win')
+                self.close()
 
     def paintEvent(self, e):
         qp = QPainter()
