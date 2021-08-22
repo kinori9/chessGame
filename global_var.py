@@ -4,5 +4,5 @@ map_x = 7
 map_y = 7
 white_status = 0
 black_status = 0
-white_piece = {}
-black_piece = {}
+white_pieces = {}
+black_pieces = {}

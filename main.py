@@ -9,12 +9,39 @@ from get_kinght_list import *
 from get_bishop_list import *
 from get_king_list import *
 from location_cal import *
-from chess_piece import *
+from chess_pieces import *
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import *
 from PyQt5.QtGui import QPainter, QPen, QColor, QBrush, QFont
+from PIL import Image
 
 #chess_board = [[0 for col in range(11)] for row in range(10)]
+
+im = Image.open('./chess_pieces_img/w_pawn_png_shadow_100px.png')
+w_pawn = im.load()
+im = Image.open('./chess_pieces_img/w_rook_png_shadow_100px.png')
+w_rook = im.load()
+im = Image.open('./chess_pieces_img/w_knight_png_shadow_100px.png')
+w_knight = im.load()
+im = Image.open('./chess_pieces_img/w_queen_png_shadow_100px.png')
+w_queen = im.load()
+im = Image.open('./chess_pieces_img/w_bishop_png_shadow_100px.png')
+w_bishop = im.load()
+im = Image.open('./chess_pieces_img/w_king_png_shadow_100px.png')
+w_king = im.load()
+
+im = Image.open('./chess_pieces_img/b_pawn_png_shadow_100px.png')
+b_pawn = im.load()
+im = Image.open('./chess_pieces_img/b_rook_png_shadow_100px.png')
+b_rook = im.load()
+im = Image.open('./chess_pieces_img/b_knight_png_shadow_100px.png')
+b_knight = im.load()
+im = Image.open('./chess_pieces_img/b_queen_png_shadow_100px.png')
+b_queen = im.load()
+im = Image.open('./chess_pieces_img/b_bishop_png_shadow_100px.png')
+b_bishop = im.load()
+im = Image.open('./chess_pieces_img/b_king_png_shadow_100px.png')
+b_king = im.load()
 
 # ================= class start ===================
 
@@ -40,7 +67,50 @@ class MyApp(QWidget):
         self.move(100, 100)
         self.resize(800, 800)
         self.show()
-        piece_init(white_piece, black_piece)
+        piece_init(white_pieces, black_pieces)
+
+    def chess_piece_print(self, qp, piece_data, value):
+        red = 0
+        green = 0
+        blue = 0
+        transparent = 0
+        for i in range(100):
+            for j in range(100):
+                rgb = piece_data[i, j]
+                red = rgb[0]
+                green = rgb[1]
+                blue = rgb[2]
+                transparent = rgb[3]
+                qp.setPen(QColor(red, green, blue, transparent))
+                qp.drawPoint(value.x * 100 + i, value.y * 100 + j)
+
+    def chess_pieces_print(self, qp):
+        for key, value in white_pieces.items():
+            if value.kinds == 'PAWN':
+                self.chess_piece_print(qp, w_pawn, value)
+            if value.kinds == 'ROOK':
+                self.chess_piece_print(qp, w_rook, value)
+            if value.kinds == 'KINGHT':
+                self.chess_piece_print(qp, w_knight, value)
+            if value.kinds == 'BISHOP':
+                self.chess_piece_print(qp, w_bishop, value)
+            if value.kinds == 'QUEEN':
+                self.chess_piece_print(qp, w_queen, value)
+            if value.kinds == 'KING':
+                self.chess_piece_print(qp, w_king, value)
+        for key, value in black_pieces.items():
+            if value.kinds == 'PAWN':
+                self.chess_piece_print(qp, b_pawn, value)
+            if value.kinds == 'ROOK':
+                self.chess_piece_print(qp, b_rook, value)
+            if value.kinds == 'KINGHT':
+                self.chess_piece_print(qp, b_knight, value)
+            if value.kinds == 'BISHOP':
+                self.chess_piece_print(qp, b_bishop, value)
+            if value.kinds == 'QUEEN':
+                self.chess_piece_print(qp, b_queen, value)
+            if value.kinds == 'KING':
+                self.chess_piece_print(qp, b_king, value)
 
 # ================ chees_board setting ==================
     def change_value_select_location(self, qp):
@@ -53,23 +123,23 @@ class MyApp(QWidget):
     def change_piece_location(self, qp):
         if self.move_select_x != -1 and self.move_select_y != -1:
             if self.color == 'white':
-                for name, piece in white_piece.items():
+                for name, piece in white_pieces.items():
                     if name == self.name:
-                        if name in white_piece:
-                            white_piece[name].x = int(self.move_select_x)
-                            white_piece[name].y = int(self.move_select_y)
-                        for name, piece in list(black_piece.items()):
+                        if name in white_pieces:
+                            white_pieces[name].x = int(self.move_select_x)
+                            white_pieces[name].y = int(self.move_select_y)
+                        for name, piece in list(black_pieces.items()):
                             if piece.x == self.move_select_x and piece.y == self.move_select_y:
-                                del black_piece[name]
+                                del black_pieces[name]
             elif self.color == 'black':
-                for name, piece in black_piece.items():
+                for name, piece in black_pieces.items():
                     if name == self.name:
-                        if name in black_piece:
-                            black_piece[name].x = int(self.move_select_x)
-                            black_piece[name].y = int(self.move_select_y)
-                        for name, piece in list(white_piece.items()):
+                        if name in black_pieces:
+                            black_pieces[name].x = int(self.move_select_x)
+                            black_pieces[name].y = int(self.move_select_y)
+                        for name, piece in list(white_pieces.items()):
                             if piece.x == self.move_select_x and piece.y == self.move_select_y:
-                                del white_piece[name]
+                                del white_pieces[name]
             self.color = None
             self.update()
             self.move_select_x = -1
@@ -118,18 +188,20 @@ class MyApp(QWidget):
             x = int(location[0]) * 100 + 10 
             y = int(location[1]) * 100 + 50
             qp.drawText(x, y, 'can move')
+
+
         
     def draw_init_chessPiece(self, qp):
         x = 100
         y = 0
-
-        qp.setFont(QFont('Arial', 26))
-        for key, value in white_piece.items():
-            qp.setPen(QPen(Qt.red, 3))
-            qp.drawText((value.x) * 100 + 10, (value.y) * 100 + 50, value.kinds)
-        for key, value in black_piece.items():
-            qp.setPen(QPen(Qt.blue, 3))
-            qp.drawText((value.x) * 100 + 10, (value.y) * 100 + 50, value.kinds)
+        self.chess_pieces_print(qp)
+#        qp.setFont(QFont('Arial', 26))
+#        for key, value in white_pieces.items():
+#            qp.setPen(QPen(Qt.red, 3))
+#            qp.drawText((value.x) * 100 + 10, (value.y) * 100 + 50, value.kinds)
+#        for key, value in black_pieces.items():
+#            qp.setPen(QPen(Qt.blue, 3))
+#            qp.drawText((value.x) * 100 + 10, (value.y) * 100 + 50, value.kinds)
 
     def draw_init_chessBoard(self, qp):
         qp.setPen(QPen(Qt.black, 1))
@@ -152,11 +224,11 @@ class MyApp(QWidget):
         if e.key() == Qt.Key_M:
             self.showNormal()
 
-    def piece_can_move(self, e, white_piece, black_piece, color_turn, x, y):
+    def piece_can_move(self, e, white_pieces, black_pieces, color_turn, x, y):
         white_turn = 0
         black_turn = 1
         if color_turn == white_turn:
-            for key, value in white_piece.items():
+            for key, value in white_pieces.items():
                 if value.x == x and value.y == y:
                     print('x : {}, y : {}'.format(x, y))
                     if value.kinds == 'PAWN':
@@ -172,7 +244,7 @@ class MyApp(QWidget):
                     if value.kinds == 'KING':
                         self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
         elif color_turn == black_turn:
-            for key, value in black_piece.items():
+            for key, value in black_pieces.items():
                 if value.x == x and value.y == y:
                     if value.kinds == 'PAWN':
                         self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
@@ -187,7 +259,7 @@ class MyApp(QWidget):
                     if value.kinds == 'KING':
                         self.name, self.select_x, self.select_y, self.kinds, self.color = key, value.x, value.y, value.kinds, value.color
 
-    def piece_move(self, white_piece, black_piece, x, y):
+    def piece_move(self, white_pieces, black_pieces, x, y):
         global turn
         check = False
         fix_x = 10
@@ -206,8 +278,8 @@ class MyApp(QWidget):
             
     def mousePressEvent(self, e):
         global turn
-        global white_piece
-        global black_piece
+        global white_pieces
+        global black_pieces
         global white_status
         global black_status
         white_turn = 0
@@ -219,31 +291,31 @@ class MyApp(QWidget):
             print('x : {} y: {}'.format(x, y))
             if turn % 2 == white_turn:
                 if white_status == 0:
-                    self.piece_select(white_piece, black_piece, white_turn, x, y)
+                    self.piece_select(white_pieces, black_pieces, white_turn, x, y)
                     if self.color != 'white':
                         white_status == 0
                     else:
-                        self.piece_can_move(e, white_piece, black_piece, white_turn, x, y)
+                        self.piece_can_move(e, white_pieces, black_pieces, white_turn, x, y)
                         self.update()
                 elif white_status == 1:
-                    self.piece_move(white_piece, black_piece, x, y)
+                    self.piece_move(white_pieces, black_pieces, x, y)
                     white_status = 0
             else:
                 if black_status == 0:
-                    self.piece_select(white_piece, black_piece, black_turn, x, y)
+                    self.piece_select(white_pieces, black_pieces, black_turn, x, y)
                     if self.color != 'black':
                         black_status == 0
                     else:
-                        self.piece_can_move(e, white_piece, black_piece, black_turn, x, y)
+                        self.piece_can_move(e, white_pieces, black_pieces, black_turn, x, y)
                         self.update()
                 elif black_status == 1:
-                    self.piece_move(white_piece, black_piece, x, y)
+                    self.piece_move(white_pieces, black_pieces, x, y)
                     black_status = 0
             print("#############################################")
             print('################now turn : {}################'.format(turn))
             print("#############################################")
 
-    def piece_select(self, white_piece, black_piece, color_turn, x, y):
+    def piece_select(self, white_pieces, black_pieces, color_turn, x, y):
         global white_status
         global black_status
         white_turn = 0
@@ -251,22 +323,22 @@ class MyApp(QWidget):
         status = 0
 
         if color_turn == white_turn:
-            for key, value in white_piece.items():
+            for key, value in white_pieces.items():
                 if value.x == x and value.y == y:
                     self.color = value.color
                     white_status = 1
         else: #elif color_turn == black_turn:
-            for key, value in black_piece.items():
+            for key, value in black_pieces.items():
                 if value.x == x and value.y == y:
                     self.color = value.color
                     black_status = 1
         if color_turn == white_turn and white_status == 0:
             print("#############################################")
-            print("#########please white_piece choice###########")
+            print("#########please white_pieces choice###########")
             print("#############################################")
         elif color_turn == black_turn and black_status == 0:
             print("#############################################")
-            print("#########please black_piece choice###########")
+            print("#########please black_pieces choice###########")
             print("#############################################")
             
 # ================= class end ==================

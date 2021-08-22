@@ -11,7 +11,7 @@ def get_king_list(x, y, color):
         not_found_6 = True
         not_found_7 = True
         not_found_8 = True
-        for name, w_piece in white_piece.items():
+        for name, w_piece in white_pieces.items():
             if w_piece.x == x and w_piece.y == y - 1:
                 not_found_1 = False
             if w_piece.x == x + 1 and w_piece.y == y - 1:
@@ -53,7 +53,7 @@ def get_king_list(x, y, color):
         not_found_6 = True
         not_found_7 = True
         not_found_8 = True
-        for name, b_piece in black_piece.items():
+        for name, b_piece in black_pieces.items():
             if b_piece.x == x and b_piece.y == y - 1:
                 not_found_1 = False
             if b_piece.x == x + 1 and b_piece.y == y - 1:

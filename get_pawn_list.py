@@ -7,12 +7,12 @@ def get_pawn_list(x, y, color):
     minus = -1
     can_move_list = []
     not_found = True
-    #print('white_piece.items() : {}\n black_piece', white_piece, black_piece)
+    #print('white_pieces.items() : {}\n black_pieces', white_pieces, black_pieces)
     if color == 'white':
         if y == 6: #예외 처리 맨처음 두칸 갈수 있을경우 
             for i in range(1, 3):
-                for b_name, b_piece in black_piece.items():
-                    for w_name, w_piece in white_piece.items():
+                for b_name, b_piece in black_pieces.items():
+                    for w_name, w_piece in white_pieces.items():
                         if (w_piece.x == x and w_piece.y == y - i ) or (b_piece.x == x and b_piece.y == y - 1):
                             not_found = False
                 if not_found == True:
@@ -21,8 +21,8 @@ def get_pawn_list(x, y, color):
                     break
         else:
             for i in range(1, 2):
-                for b_name, b_piece in black_piece.items():
-                    for w_name, w_piece in white_piece.items():
+                for b_name, b_piece in black_pieces.items():
+                    for w_name, w_piece in white_pieces.items():
                         if (w_piece.x == x and w_piece.y == y - i) or (b_piece.x == x and b_piece.y == y - 1):
                             not_found = False
 
@@ -30,7 +30,7 @@ def get_pawn_list(x, y, color):
                     can_move_list.append(str(x) + ',' + str(y - i))
                 else:
                     break
-        for name, piece in black_piece.items():
+        for name, piece in black_pieces.items():
             if piece.x == x - 1 and piece.y == y - 1:
                 can_move_list.append(str(x - 1) + ',' + str(y - 1))
             if piece.x == x + 1 and piece.y == y - 1:
@@ -38,8 +38,8 @@ def get_pawn_list(x, y, color):
     else: # if color == 'black':
         if y == 1:
             for i in range(1, 3):
-                for w_name, w_piece in white_piece.items():
-                    for b_name, b_piece in black_piece.items():
+                for w_name, w_piece in white_pieces.items():
+                    for b_name, b_piece in black_pieces.items():
                         if (w_piece.x == x and w_piece.y == y + i) or (b_piece.x == x and b_piece.y == y + 1):
                             not_found = False
                 if not_found == True:
@@ -48,15 +48,15 @@ def get_pawn_list(x, y, color):
                     break
         else:
             for i in range(1, 2):
-                for w_name, w_piece in white_piece.items():
-                    for b_name, b_piece in black_piece.items():
+                for w_name, w_piece in white_pieces.items():
+                    for b_name, b_piece in black_pieces.items():
                         if (b_piece.x == x and b_piece.y == y + i) or (w_piece.x == x and w_piece.y == y + 1):
                             not_found = False
                 if not_found == True:
                     can_move_list.append(str(x) + ',' + str(y + i))
                 else:
                     break
-        for name, piece in white_piece.items():
+        for name, piece in white_pieces.items():
             if piece.x == x - 1 and piece.y == y + 1:
                 can_move_list.append(str(x - 1) + ',' + str(y + 1))
             if piece.x == x + 1 and piece.y == y + 1:

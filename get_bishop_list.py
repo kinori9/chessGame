@@ -7,8 +7,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for w_name, w_piece in white_piece.items():
-                for b_name, b_piece in black_piece.items():
+            for w_name, w_piece in white_pieces.items():
+                for b_name, b_piece in black_pieces.items():
                     if w_piece.x == x + i and w_piece.y == y - i:
                         not_found = False
                     if (b_piece.x == x + i and b_piece.y == y - i) and kill == False:
@@ -24,8 +24,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for w_name, w_piece in white_piece.items():
-                for b_name, b_piece in black_piece.items():
+            for w_name, w_piece in white_pieces.items():
+                for b_name, b_piece in black_pieces.items():
                     if w_piece.x == x - i and w_piece.y == y - i:
                         not_found = False
                     if (b_piece.x == x - i and b_piece.y == y - i) and kill == False:
@@ -41,8 +41,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for w_name, w_piece in white_piece.items():
-                for b_name, b_piece in black_piece.items():
+            for w_name, w_piece in white_pieces.items():
+                for b_name, b_piece in black_pieces.items():
                     if w_piece.x == x - i and w_piece.y == y + i:
                         not_found = False
                     if (b_piece.x == x - i and b_piece.y == y + i) and kill == False:
@@ -58,8 +58,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for w_name, w_piece in white_piece.items():
-                for b_name, b_piece in black_piece.items():
+            for w_name, w_piece in white_pieces.items():
+                for b_name, b_piece in black_pieces.items():
                     if w_piece.x == x + i and w_piece.y == y + i:
                         not_found = False
                     if (b_piece.x == x + i and b_piece.y == y + i) and kill == False:
@@ -75,8 +75,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for b_name, b_piece in black_piece.items():
-                for w_name, w_piece in white_piece.items():
+            for b_name, b_piece in black_pieces.items():
+                for w_name, w_piece in white_pieces.items():
                     if b_piece.x == x + i and b_piece.y == y - i:
                         not_found = False
                     if (w_piece.x == x + i and w_piece.y == y - i) and kill == False:
@@ -92,8 +92,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for b_name, b_piece in black_piece.items():
-                for w_name, w_piece in white_piece.items():
+            for b_name, b_piece in black_pieces.items():
+                for w_name, w_piece in white_pieces.items():
                     if b_piece.x == x - i and b_piece.y == y - i:
                         not_found = False
                     if (w_piece.x == x - i and w_piece.y == y - i) and kill == False:
@@ -109,8 +109,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for b_name, b_piece in black_piece.items():
-                for w_name, w_piece in white_piece.items():
+            for b_name, b_piece in black_pieces.items():
+                for w_name, w_piece in white_pieces.items():
                     if b_piece.x == x - i and b_piece.y == y + i:
                         not_found = False
                     if (w_piece.x == x - i and w_piece.y == y + i) and kill == False:
@@ -126,8 +126,8 @@ def get_bishop_list(x, y, color):
         not_found = True
         kill = False
         for i in range(1, 8):
-            for b_name, b_piece in black_piece.items():
-                for w_name, w_piece in white_piece.items():
+            for b_name, b_piece in black_pieces.items():
+                for w_name, w_piece in white_pieces.items():
                     if b_piece.x == x + i and b_piece.y == y + i:
                         not_found = False
                     if (w_piece.x == x + i and w_piece.y == y + i) and kill == False:
