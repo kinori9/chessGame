@@ -67,7 +67,7 @@ class MyApp(QWidget):
         self.move(100, 100)
         self.resize(800, 800)
         self.show()
-        piece_init(white_pieces, black_pieces)
+        pieces_init(white_pieces, black_pieces)
 
     def chess_piece_print(self, qp, piece_data, value):
         red = 0
@@ -119,6 +119,21 @@ class MyApp(QWidget):
             self.draw_piece_can_move(qp)
             self.select_x = -1
             self.select_y = -1
+
+        try:
+            print(white_pieces['KING'].status)
+        except KeyError:
+            print("game over")
+            print("black win")
+            print()
+            self.close()
+
+        try:
+            print(black_pieces['KING'].status)
+        except KeyError:
+            print("game over")
+            print("white win")
+            self.close()
 
     def change_piece_location(self, qp):
         if self.move_select_x != -1 and self.move_select_y != -1:

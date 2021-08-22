@@ -1,4 +1,4 @@
-def piece_init(white_pieces, black_pieces):
+def pieces_init(white_pieces, black_pieces):
     white_pieces['PAWN1'] = Chess_Piece('PAWN', 0, 6, True, 'white')
     white_pieces['PAWN2'] = Chess_Piece('PAWN', 1, 6, True, 'white')
     white_pieces['PAWN3'] = Chess_Piece('PAWN', 2, 6, True, 'white')
